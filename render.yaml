@@ -1,0 +1,42 @@
+# ============================================
+# RENDER.COM DEPLOYMENT CONFIGURATION
+# Auto-deploys when you push to git
+# ============================================
+
+services:
+  - type: web
+    name: craft-caravan
+    env: static
+    buildCommand: echo "No build needed - pure HTML/CSS/JS"
+    staticPublishPath: .
+    
+    # Environment variables for your Supabase credentials
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+    
+    # Custom headers for security
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-XSS-Protection
+        value: 1; mode=block
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: geolocation=(), microphone=(), camera=()
+    
+    # Routes configuration
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

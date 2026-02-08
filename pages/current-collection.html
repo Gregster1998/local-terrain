@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Browse our current collection of authentic handmade crafts from artisans around the world.">
+    
+    <!-- Performance optimizations for mobile -->
+    <meta name="theme-color" content="#FAF6F0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <title>Current Collection - The Craft Caravan</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Craft Caravan</a>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#collections">Collections ▾</a>
+                    <div class="dropdown-content" id="collections-dropdown">
+                        <a href="current-collection.html">Current Collection</a>
+                        <div id="archive-collections">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </li>
+                <li><a href="blog.html">Stories</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="../index.html#newsletter" class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Join Our Journey</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Collection Header -->
+    <header style="padding: 3rem 2rem; text-align: center;">
+        <div id="collection-header" class="loading">
+            Loading collection...
+        </div>
+    </header>
+
+    <!-- Collection Items -->
+    <div class="collection-grid" id="collection-items">
+        <div class="loading">Loading pieces...</div>
+    </div>
+
+    <!-- Decorative stamps -->
+    <div class="stamp" style="position: fixed; top: 150px; right: 5%; transform: rotate(-12deg); opacity: 0.3; font-family: 'Courier New', monospace; font-size: 0.9rem; padding: 0.5rem 1rem; border: 3px double var(--azure); border-radius: 4px; color: var(--azure); pointer-events: none;">
+        AUTHENTIC<br>CRAFTS
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="current-collection.html">Current Collection</a></li>
+                    <li><a href="blog.html">Maker Stories</a></li>
+                    <li><a href="blog.html?category=Workshop+Directory">Workshop Directory</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../index.html#newsletter">Newsletter</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="shipping.html">Shipping Info</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            Once it's gone, it's gone.
+        </div>
+        <p class="text-center" style="margin-top: 1rem; font-size: 0.9rem; color: #6b635c;">
+            Each piece ships from Milan • We handle customs • Under €800, US customers pay no import duties
+        </p>
+        <p class="text-center" style="margin-top: 0.5rem; font-style: italic; color: #999;">
+            © 2026 The Craft Caravan
+        </p>
+    </footer>
+
+    <!-- Configuration -->
+    <script src="../config.js"></script>
+    
+    <!-- Supabase Client -->
+    <script src="../js/supabase-client.js"></script>
+    
+    <!-- Main App Logic -->
+    <script src="../js/main.js"></script>
+    
+    <!-- Collection Page Specific Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Supabase
+            window.CraftCaravanAPI.init();
+            
+            // Load collection
+            await loadCurrentCollection();
+        });
+        
+        async function loadCurrentCollection() {
+            const headerContainer = document.getElementById('collection-header');
+            const itemsContainer = document.getElementById('collection-items');
+            
+            // Get current collection
+            const { data: collection, error: collectionError } = await window.CraftCaravanAPI.collections.getCurrent();
+            
+            if (collectionError || !collection) {
+                headerContainer.innerHTML = '<p class="error-message">No current collection available.</p>';
+                itemsContainer.innerHTML = '';
+                return;
+            }
+            
+            // Display collection header
+            const travelDate = new Date(collection.travel_date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long'
+            });
+            
+            headerContainer.innerHTML = `
+                <h1 style="font-family: var(--font-handwriting); font-size: 3.5rem; color: var(--terracotta); margin-bottom: 0.5rem; transform: rotate(-1deg); display: inline-block;">
+                    ${collection.name}
+                </h1>
+                <div style="font-family: var(--font-serif); font-style: italic; font-size: 1.2rem; color: var(--olive); margin-bottom: 1rem;">
+                    ~ ${collection.country} • ${travelDate} ~
+                </div>
+                <p style="max-width: 700px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem;">
+                    ${collection.description}
+                </p>
+            `;
+            
+            // Get items in this collection
+            const { data: items, error: itemsError } = await window.CraftCaravanAPI.items.getByCollection(collection.id);
+            
+            if (itemsError || !items || items.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-center">No items available in this collection yet.</p>';
+                return;
+            }
+            
+            // Display items
+            itemsContainer.innerHTML = '';
+            
+            items.forEach((item, index) => {
+                const card = createItemCard(item, index);
+                itemsContainer.appendChild(card);
+            });
+            
+            // Show count
+            const availableCount = items.filter(i => i.status === 'available').length;
+            const totalCount = items.length;
+            
+            if (availableCount < totalCount) {
+                const countInfo = document.createElement('p');
+                countInfo.className = 'text-center';
+                countInfo.style.marginTop = '2rem';
+                countInfo.style.fontSize = '1.1rem';
+                countInfo.style.fontStyle = 'italic';
+                countInfo.style.color = 'var(--olive)';
+                countInfo.textContent = `${availableCount} of ${totalCount} pieces still available`;
+                
+                headerContainer.appendChild(countInfo);
+            }
+        }
+    </script>
+</body>
+</html>

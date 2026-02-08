@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Stop buying souvenirs. Get the real thing. We find artisans who don't exist online and bring their crafts to you.">
+    <meta name="keywords" content="authentic crafts, traditional artisans, handmade pottery, slow travel, sustainable shopping">
+    
+    <!-- Performance optimizations for mobile -->
+    <meta name="theme-color" content="#FAF6F0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Security Headers (configure in hosting platform) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
+    <!-- SEO -->
+    <meta property="og:title" content="The Craft Caravan - Authentic Crafts from Artisans Who Don't Exist Online">
+    <meta property="og:description" content="We find workshops that don't advertise, artisans who haven't gone digital, techniques being forgotten.">
+    <meta property="og:type" content="website">
+    
+    <title>The Craft Caravan - Real Crafts from Real Artisans</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">The Craft Caravan</a>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#collections">Collections ▾</a>
+                    <div class="dropdown-content" id="collections-dropdown">
+                        <a href="pages/current-collection.html">Current Collection</a>
+                        <div id="archive-collections">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </li>
+                <li><a href="pages/blog.html">Stories</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="#newsletter" class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Join Our Journey</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section: The Window -->
+    <section class="window-hero">
+        <div class="window-frame">
+            <div class="window-content">
+                <h1 class="window-title">Stop. Look. Discover.</h1>
+                <p class="window-subtitle">~ We Find What's Disappearing ~</p>
+                <p class="window-text">
+                    We hunt for workshops that don't advertise, artisans who haven't gone digital, 
+                    techniques being forgotten. Each piece here was made by hands that have been doing this for generations.
+                </p>
+                <p class="window-text">
+                    This isn't mass production. This isn't imported souvenirs. This is the real thing.
+                </p>
+                <a href="pages/current-collection.html" class="cta-button">See Current Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy: 4 Pillars -->
+    <section class="philosophy">
+        <h2 class="text-center">How We Work</h2>
+        <div class="philosophy-grid">
+            <div class="pillar">
+                <div class="pillar-icon">🔍</div>
+                <h3 class="pillar-title">Exploring</h3>
+                <p class="pillar-text">
+                    We spend weeks finding workshops that don't advertise. 
+                    Asking locals, following recommendations, getting lost in backstreets.
+                </p>
+            </div>
+            
+            <div class="pillar">
+                <div class="pillar-icon">📖</div>
+                <h3 class="pillar-title">Learning</h3>
+                <p class="pillar-text">
+                    Every piece comes with its story—who made it, how they learned, 
+                    why it matters. We document crafts before they disappear.
+                </p>
+            </div>
+            
+            <div class="pillar">
+                <div class="pillar-icon">🤝</div>
+                <h3 class="pillar-title">Sharing</h3>
+                <p class="pillar-text">
+                    Limited collections. Rotating exhibitions. Once it's gone, it's gone. 
+                    We share workshop contacts freely—support artisans directly.
+                </p>
+            </div>
+            
+            <div class="pillar">
+                <div class="pillar-icon">✨</div>
+                <h3 class="pillar-title">Doing</h3>
+                <p class="pillar-text">
+                    Join us on craft retreats. Learn from the same artisans we find. 
+                    Experience authentic travel, not tourism.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Collection Preview -->
+    <section class="container mt-lg">
+        <h2 class="text-center mb-md">Currently Showing</h2>
+        <div id="current-collection-preview" class="loading">
+            Loading current collection...
+        </div>
+    </section>
+
+    <!-- Recent Blog Posts -->
+    <section class="container mt-lg">
+        <h2 class="text-center mb-md">Recent Stories</h2>
+        <div id="recent-posts" class="blog-grid">
+            <div class="loading">Loading stories...</div>
+        </div>
+        <div class="text-center mt-md">
+            <a href="pages/blog.html" class="cta-button">Read All Stories</a>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="container mt-lg mb-lg" id="newsletter">
+        <div style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; box-shadow: 0 4px 12px var(--shadow); border-radius: 8px;">
+            <h2 class="text-center">Join Our Journey</h2>
+            <p class="text-center" style="margin-bottom: 1.5rem;">
+                Get notified when new collections drop, read maker stories, and be first to know about craft retreats.
+            </p>
+            <form id="newsletter-form">
+                <div class="form-group">
+                    <input type="email" id="newsletter-email" placeholder="Your email" required>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                        <input type="checkbox" name="interests" value="new_collections"> Notify me of new collections
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; margin-top: 0.5rem;">
+                        <input type="checkbox" name="interests" value="craft_retreats"> Interested in craft retreats
+                    </label>
+                </div>
+                <button type="submit" class="form-submit">Join the Caravan</button>
+                <div id="newsletter-error" class="form-error"></div>
+                <div id="newsletter-success" class="success-message" style="display: none; margin-top: 1rem;">
+                    Welcome aboard! Check your email to confirm.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="pages/current-collection.html">Current Collection</a></li>
+                    <li><a href="pages/blog.html">Maker Stories</a></li>
+                    <li><a href="pages/blog.html?category=Workshop+Directory">Workshop Directory</a></li>
+                    <li><a href="pages/experiences.html">Craft Retreats (Coming Soon)</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="pages/about.html">About Us</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="#newsletter">Newsletter</a></li>
+                    <li><a href="https://instagram.com/craftcaravan" target="_blank">Instagram</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="pages/shipping.html">Shipping Info</a></li>
+                    <li><a href="pages/faq.html">FAQ</a></li>
+                    <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            More treasures coming soon...
+        </div>
+        <p class="text-center" style="margin-top: 1rem; font-size: 0.9rem; color: #6b635c;">
+            Each piece ships from Milan • We handle customs • Under €800, US customers pay no import duties
+        </p>
+        <p class="text-center" style="margin-top: 0.5rem; font-style: italic; color: #999;">
+            © 2026 The Craft Caravan. Once it's gone, it's gone.
+        </p>
+    </footer>
+
+    <!-- Configuration (create this file before deploying) -->
+    <script src="config.js"></script>
+    
+    <!-- Supabase Client -->
+    <script src="js/supabase-client.js"></script>
+    
+    <!-- Main App Logic -->
+    <script src="js/main.js"></script>
+    
+    <!-- Home Page Specific Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Supabase
+            window.CraftCaravanAPI.init();
+            
+            // Load current collection preview
+            await loadCurrentCollectionPreview();
+            
+            // Load recent blog posts
+            await loadRecentPosts();
+            
+            // Handle newsletter form
+            handleNewsletterForm();
+        });
+        
+        async function loadCurrentCollectionPreview() {
+            const container = document.getElementById('current-collection-preview');
+            
+            const { data: collection, error } = await window.CraftCaravanAPI.collections.getCurrent();
+            
+            if (error || !collection) {
+                container.innerHTML = '<p class="text-center">No current collection available.</p>';
+                return;
+            }
+            
+            // Get items from this collection
+            const { data: items } = await window.CraftCaravanAPI.items.getByCollection(collection.id);
+            
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p class="text-center">Collection coming soon...</p>';
+                return;
+            }
+            
+            // Show collection header
+            container.innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h3 style="font-family: var(--font-handwriting); font-size: 2rem; color: var(--terracotta);">
+                        ${collection.name}
+                    </h3>
+                    <p style="font-style: italic; color: var(--olive);">
+                        ${collection.description}
+                    </p>
+                </div>
+                <div class="collection-grid" id="preview-items"></div>
+            `;
+            
+            // Show first 3 items
+            const previewItems = items.slice(0, 3);
+            const previewContainer = document.getElementById('preview-items');
+            
+            previewItems.forEach((item, index) => {
+                const card = createItemCard(item, index);
+                previewContainer.appendChild(card);
+            });
+        }
+        
+        async function loadRecentPosts() {
+            const container = document.getElementById('recent-posts');
+            
+            const { data: posts, error } = await window.CraftCaravanAPI.posts.getAll(3);
+            
+            if (error || !posts || posts.length === 0) {
+                container.innerHTML = '<p class="text-center">No stories available yet.</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            posts.forEach(post => {
+                const card = createBlogCard(post);
+                container.appendChild(card);
+            });
+        }
+        
+        function handleNewsletterForm() {
+            const form = document.getElementById('newsletter-form');
+            const errorDiv = document.getElementById('newsletter-error');
+            const successDiv = document.getElementById('newsletter-success');
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Clear previous messages
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+                
+                const email = document.getElementById('newsletter-email').value;
+                const checkboxes = form.querySelectorAll('input[name="interests"]:checked');
+                const interests = Array.from(checkboxes).map(cb => cb.value);
+                
+                // Disable submit button
+                const submitBtn = form.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Joining...';
+                
+                const { data, error } = await window.CraftCaravanAPI.newsletter.subscribe(
+                    email,
+                    interests,
+                    'landing_page'
+                );
+                
+                if (error) {
+                    errorDiv.textContent = error;
+                    errorDiv.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join the Caravan';
+                } else {
+                    successDiv.style.display = 'block';
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join the Caravan';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

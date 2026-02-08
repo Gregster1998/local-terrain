@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- Dynamic meta tags will be populated by JavaScript -->
+    <title id="page-title">Loading... - Local Terrain</title>
+    <meta name="description" id="page-description" content="Authentic craft stories from Local Terrain">
+    <meta name="keywords" id="page-keywords" content="artisan stories, traditional crafts, handmade">
+    <meta name="author" content="Local Terrain">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" id="page-canonical" href="https://local-terrain.onrender.com/pages/blog-post.html">
+    
+    <!-- Article Meta Tags -->
+    <meta property="article:publisher" content="Local Terrain">
+    <meta property="article:section" content="Craft Stories">
+    <meta property="article:modified_time" content="" id="article-modified">
+    <meta property="article:published_time" content="" id="article-published">
+    <meta property="article:author" content="Local Terrain">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:site_name" content="Local Terrain">
+    <meta property="og:title" id="og-title" content="">
+    <meta property="og:description" id="og-description" content="">
+    <meta property="og:image" id="og-image" content="">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" id="og-image-alt" content="">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" id="twitter-url" content="">
+    <meta name="twitter:title" id="twitter-title" content="">
+    <meta name="twitter:description" id="twitter-description" content="">
+    <meta name="twitter:image" id="twitter-image" content="">
+    <meta name="twitter:image:alt" id="twitter-image-alt" content="">
+    <meta name="twitter:creator" content="@localterrain">
+    <meta name="twitter:site" content="@localterrain">
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#FAF6F0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    
+    <!-- Geo Tags (will be populated based on post location) -->
+    <meta name="geo.region" content="EU">
+    <meta name="geo.placename" id="geo-place" content="">
+    
+    <!-- Structured Data Container (populated by JavaScript) -->
+    <script type="application/ld+json" id="structured-data-article">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Loading...",
+        "description": "Loading post...",
+        "author": {
+            "@type": "Person",
+            "name": "Local Terrain"
+        }
+    }
+    </script>
+    
+    <!-- Breadcrumb Structured Data (static base) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://local-terrain.onrender.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Stories",
+                "item": "https://local-terrain.onrender.com/pages/blog.html"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo" aria-label="Local Terrain Home">Local Terrain</a>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#collections">Collections ▾</a>
+                    <div class="dropdown-content" id="collections-dropdown">
+                        <a href="current-collection.html">Current Collection</a>
+                        <div id="archive-collections"></div>
+                    </div>
+                </li>
+                <li><a href="blog.html">Stories</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="../index.html#newsletter" class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Join Our Journey</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="../index.html">
+                    <span itemprop="name">Home</span>
+                </a>
+                <meta itemprop="position" content="1" />
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="blog.html">
+                    <span itemprop="name">Stories</span>
+                </a>
+                <meta itemprop="position" content="2" />
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name" id="breadcrumb-current">Loading...</span>
+                <meta itemprop="position" content="3" />
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div id="post-loading" class="loading" style="text-align: center; padding: 4rem;">
+            Loading story...
+        </div>
+        
+        <article id="post-article" class="blog-post-article" style="display: none;" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-post-container">
+                <!-- Post Header -->
+                <header class="post-header">
+                    <div class="post-category-tag" itemprop="articleSection" id="post-category"></div>
+                    <h1 class="post-title" itemprop="headline" id="post-title"></h1>
+                    
+                    <div class="post-meta">
+                        <div class="post-meta-item">
+                            <span class="meta-label">By</span>
+                            <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                <span itemprop="name" id="post-author"></span>
+                            </span>
+                        </div>
+                        <div class="post-meta-item">
+                            <span class="meta-label">Published</span>
+                            <time itemprop="datePublished" id="post-date" datetime=""></time>
+                        </div>
+                        <div class="post-meta-item">
+                            <span class="meta-label">Reading time</span>
+                            <span id="post-reading-time"></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Image -->
+                    <figure class="post-featured-image" id="post-image-container" style="display: none;">
+                        <img 
+                            id="post-featured-image" 
+                            itemprop="image" 
+                            alt="" 
+                            loading="eager"
+                        >
+                        <figcaption id="post-image-caption"></figcaption>
+                    </figure>
+                </header>
+
+                <!-- Post Content -->
+                <div class="post-content" itemprop="articleBody" id="post-content">
+                    <!-- Content loaded here -->
+                </div>
+
+                <!-- Post Footer -->
+                <footer class="post-footer">
+                    <!-- Share Buttons -->
+                    <div class="post-share">
+                        <h3>Share This Story</h3>
+                        <div class="share-buttons">
+                            <button class="share-btn share-twitter" aria-label="Share on Twitter" id="share-twitter">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                                </svg>
+                                Twitter
+                            </button>
+                            <button class="share-btn share-facebook" aria-label="Share on Facebook" id="share-facebook">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                </svg>
+                                Facebook
+                            </button>
+                            <button class="share-btn share-pinterest" aria-label="Share on Pinterest" id="share-pinterest">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.546 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+                                </svg>
+                                Pinterest
+                            </button>
+                            <button class="share-btn share-copy" aria-label="Copy link" id="share-copy">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="post-tags" id="post-tags-container" style="display: none;">
+                        <h3>Related Topics</h3>
+                        <div class="tags-list" id="post-tags"></div>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Related Posts -->
+            <aside class="related-posts" id="related-posts-container" style="display: none;">
+                <h2>More Stories You'll Love</h2>
+                <div class="related-posts-grid" id="related-posts-grid"></div>
+            </aside>
+
+            <!-- Newsletter CTA -->
+            <section class="post-newsletter-cta">
+                <div class="newsletter-card">
+                    <h2>Get More Stories Like This</h2>
+                    <p>Join our community of craft enthusiasts. Weekly maker stories, workshop discoveries, and craft preservation updates.</p>
+                    <form id="post-newsletter-form" aria-label="Newsletter signup">
+                        <div class="newsletter-input-group">
+                            <input 
+                                type="email" 
+                                id="post-newsletter-email" 
+                                placeholder="Your email address" 
+                                required
+                                aria-label="Email address"
+                            >
+                            <button type="submit" class="cta-button">Subscribe</button>
+                        </div>
+                        <div id="post-newsletter-error" class="form-error" role="alert"></div>
+                        <div id="post-newsletter-success" class="success-message" style="display: none;">
+                            Welcome aboard! Check your email to confirm.
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Back to Blog -->
+            <div class="text-center mt-lg">
+                <a href="blog.html" class="cta-button">← Back to All Stories</a>
+            </div>
+
+            <!-- Hidden metadata for SEO -->
+            <meta itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                <meta itemprop="name" content="Local Terrain">
+                <meta itemprop="logo" content="https://local-terrain.onrender.com/images/logo.png">
+            </span>
+            <meta itemprop="dateModified" id="meta-date-modified" content="">
+            <meta itemprop="mainEntityOfPage" id="meta-main-entity" content="">
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="current-collection.html">Current Collection</a></li>
+                    <li><a href="blog.html">Maker Stories</a></li>
+                    <li><a href="blog.html?category=Workshop+Directory">Workshop Directory</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../index.html#newsletter">Newsletter</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="shipping.html">Shipping Info</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            Preserving traditional crafts, one story at a time...
+        </div>
+        <p class="text-center" style="margin-top: 1rem; font-size: 0.9rem; color: #6b635c;">
+            © 2026 Local Terrain. Authentic crafts, authentic stories.
+        </p>
+    </footer>
+
+    <!-- Configuration -->
+    <script src="../config.js"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <!-- Blog Post Logic -->
+    <script>
+        let currentPost = null;
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            window.CraftCaravanAPI.init();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (!slug) {
+                window.location.href = 'blog.html';
+                return;
+            }
+            
+            await loadBlogPost(slug);
+            setupNewsletterForm();
+        });
+        
+        async function loadBlogPost(slug) {
+            const { data: post, error } = await window.CraftCaravanAPI.posts.getBySlug(slug);
+            
+            if (error || !post) {
+                document.getElementById('post-loading').innerHTML = `
+                    <div class="error-message">
+                        <h2>Story Not Found</h2>
+                        <p>The story you're looking for doesn't exist or has been removed.</p>
+                        <a href="blog.html" class="cta-button">View All Stories</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            currentPost = post;
+            displayPost(post);
+            await loadRelatedPosts(post.category, post.id);
+        }
+        
+        function displayPost(post) {
+            // Hide loading, show article
+            document.getElementById('post-loading').style.display = 'none';
+            document.getElementById('post-article').style.display = 'block';
+            
+            // Update meta tags
+            updateMetaTags(post);
+            
+            // Update content
+            document.getElementById('post-category').textContent = post.category;
+            document.getElementById('post-title').textContent = post.title;
+            document.getElementById('post-author').textContent = post.author || 'Local Terrain';
+            document.getElementById('breadcrumb-current').textContent = post.title;
+            
+            // Format and display date
+            const publishedDate = new Date(post.published_at);
+            const dateElement = document.getElementById('post-date');
+            dateElement.textContent = publishedDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            dateElement.setAttribute('datetime', publishedDate.toISOString());
+            
+            // Calculate reading time
+            const wordCount = post.content.split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
+            document.getElementById('post-reading-time').textContent = `${readingTime} min read`;
+            
+            // Featured image
+            if (post.featured_image) {
+                const imgContainer = document.getElementById('post-image-container');
+                const img = document.getElementById('post-featured-image');
+                img.src = post.featured_image;
+                img.alt = post.title;
+                document.getElementById('post-image-caption').textContent = post.title;
+                imgContainer.style.display = 'block';
+            }
+            
+            // Content (convert markdown-style to HTML)
+            const content = convertMarkdownToHTML(post.content);
+            document.getElementById('post-content').innerHTML = content;
+            
+            // Setup share buttons
+            setupShareButtons(post);
+            
+            // Update structured data
+            updateStructuredData(post);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function updateMetaTags(post) {
+            const baseUrl = 'https://local-terrain.onrender.com';
+            const postUrl = `${baseUrl}/pages/blog-post.html?slug=${post.slug}`;
+            
+            // Title
+            document.title = `${post.title} - Local Terrain`;
+            document.getElementById('page-title').content = `${post.title} - Local Terrain`;
+            
+            // Description
+            const description = post.excerpt || post.title;
+            document.getElementById('page-description').content = description;
+            
+            // SEO Description (using seo_description if available)
+            if (post.seo_description) {
+                document.querySelector('meta[name="description"]').content = post.seo_description;
+            }
+            
+            // Canonical
+            document.getElementById('page-canonical').href = postUrl;
+            
+            // Open Graph
+            document.getElementById('og-url').content = postUrl;
+            document.getElementById('og-title').content = post.title;
+            document.getElementById('og-description').content = description;
+            if (post.featured_image) {
+                document.getElementById('og-image').content = post.featured_image;
+                document.getElementById('og-image-alt').content = post.title;
+            }
+            
+            // Twitter
+            document.getElementById('twitter-url').content = postUrl;
+            document.getElementById('twitter-title').content = post.title;
+            document.getElementById('twitter-description').content = description;
+            if (post.featured_image) {
+                document.getElementById('twitter-image').content = post.featured_image;
+                document.getElementById('twitter-image-alt').content = post.title;
+            }
+            
+            // Article dates
+            const publishedDate = new Date(post.published_at).toISOString();
+            document.getElementById('article-published').content = publishedDate;
+            document.getElementById('article-modified').content = publishedDate;
+            document.getElementById('meta-date-modified').content = publishedDate;
+            document.getElementById('meta-main-entity').content = postUrl;
+        }
+        
+        function updateStructuredData(post) {
+            const baseUrl = 'https://local-terrain.onrender.com';
+            const postUrl = `${baseUrl}/pages/blog-post.html?slug=${post.slug}`;
+            
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": post.title,
+                "description": post.excerpt || post.title,
+                "image": post.featured_image || `${baseUrl}/images/default-og.jpg`,
+                "datePublished": new Date(post.published_at).toISOString(),
+                "dateModified": new Date(post.published_at).toISOString(),
+                "author": {
+                    "@type": "Person",
+                    "name": post.author || "Local Terrain"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Local Terrain",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${baseUrl}/images/logo.png`
+                    }
+                },
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": postUrl
+                },
+                "articleSection": post.category,
+                "inLanguage": "en-US"
+            };
+            
+            document.getElementById('structured-data-article').textContent = JSON.stringify(structuredData, null, 2);
+        }
+        
+        function convertMarkdownToHTML(markdown) {
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+            
+            // Bold and italic
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+            
+            // Line breaks to paragraphs
+            html = html.split('\n\n').map(para => {
+                if (para.trim() && !para.startsWith('<')) {
+                    return `<p>${para.trim()}</p>`;
+                }
+                return para;
+            }).join('\n');
+            
+            return html;
+        }
+        
+        function setupShareButtons(post) {
+            const baseUrl = 'https://local-terrain.onrender.com';
+            const postUrl = `${baseUrl}/pages/blog-post.html?slug=${post.slug}`;
+            const title = post.title;
+            
+            // Twitter
+            document.getElementById('share-twitter').onclick = () => {
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`, '_blank', 'width=600,height=400');
+            };
+            
+            // Facebook
+            document.getElementById('share-facebook').onclick = () => {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`, '_blank', 'width=600,height=400');
+            };
+            
+            // Pinterest
+            document.getElementById('share-pinterest').onclick = () => {
+                const imageUrl = post.featured_image || '';
+                window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(postUrl)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(title)}`, '_blank', 'width=600,height=400');
+            };
+            
+            // Copy link
+            document.getElementById('share-copy').onclick = async () => {
+                try {
+                    await navigator.clipboard.writeText(postUrl);
+                    const btn = document.getElementById('share-copy');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<span>✓ Copied!</span>';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                    }, 2000);
+                } catch (err) {
+                    alert('Link copied: ' + postUrl);
+                }
+            };
+        }
+        
+        async function loadRelatedPosts(category, currentPostId) {
+            const { data: posts } = await window.CraftCaravanAPI.posts.getAll(3, category);
+            
+            if (!posts || posts.length <= 1) return;
+            
+            // Filter out current post
+            const related = posts.filter(p => p.id !== currentPostId).slice(0, 3);
+            
+            if (related.length === 0) return;
+            
+            const container = document.getElementById('related-posts-container');
+            const grid = document.getElementById('related-posts-grid');
+            
+            grid.innerHTML = '';
+            related.forEach((post, index) => {
+                const card = createBlogCard(post);
+                grid.appendChild(card);
+            });
+            
+            container.style.display = 'block';
+        }
+        
+        function setupNewsletterForm() {
+            const form = document.getElementById('post-newsletter-form');
+            const errorDiv = document.getElementById('post-newsletter-error');
+            const successDiv = document.getElementById('post-newsletter-success');
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+                
+                const email = document.getElementById('post-newsletter-email').value;
+                const submitBtn = form.querySelector('button[type="submit"]');
+                
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Subscribing...';
+                
+                const { data, error } = await window.CraftCaravanAPI.newsletter.subscribe(
+                    email,
+                    ['maker_stories', 'new_posts'],
+                    `blog_post_${currentPost?.slug || 'unknown'}`
+                );
+                
+                if (error) {
+                    errorDiv.textContent = error;
+                    errorDiv.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Subscribe';
+                } else {
+                    successDiv.style.display = 'block';
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Subscribe';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

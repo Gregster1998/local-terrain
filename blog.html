@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- Primary Meta Tags -->
+    <title>Stories & Maker Journeys - Local Terrain | Authentic Craft Stories</title>
+    <meta name="title" content="Stories & Maker Journeys - Local Terrain | Authentic Craft Stories">
+    <meta name="description" content="Discover the artisans behind authentic handmade crafts. Read maker stories, workshop guides, and craft preservation journeys from around the Mediterranean.">
+    <meta name="keywords" content="artisan stories, traditional crafts, maker interviews, workshop directory, craft techniques, Mediterranean artisans, handmade pottery stories, sustainable crafts">
+    <meta name="author" content="Local Terrain">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://local-terrain.onrender.com/pages/blog.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://local-terrain.onrender.com/pages/blog.html">
+    <meta property="og:site_name" content="Local Terrain">
+    <meta property="og:title" content="Stories & Maker Journeys - Local Terrain">
+    <meta property="og:description" content="Discover the artisans behind authentic handmade crafts. Read maker stories, workshop guides, and craft preservation journeys.">
+    <meta property="og:image" content="https://local-terrain.onrender.com/images/blog-og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://local-terrain.onrender.com/pages/blog.html">
+    <meta name="twitter:title" content="Stories & Maker Journeys - Local Terrain">
+    <meta name="twitter:description" content="Discover the artisans behind authentic handmade crafts. Read maker stories, workshop guides, and craft preservation journeys.">
+    <meta name="twitter:image" content="https://local-terrain.onrender.com/images/blog-og-image.jpg">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#FAF6F0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="EU">
+    <meta name="geo.placename" content="Mediterranean">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
+    <!-- Structured Data - Website -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Local Terrain Stories",
+        "description": "Stories about traditional artisans and authentic crafts from the Mediterranean",
+        "url": "https://local-terrain.onrender.com/pages/blog.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Local Terrain",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://local-terrain.onrender.com/images/logo.png"
+            }
+        },
+        "inLanguage": "en-US"
+    }
+    </script>
+    
+    <!-- Structured Data - Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://local-terrain.onrender.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Stories",
+                "item": "https://local-terrain.onrender.com/pages/blog.html"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Skip to main content (accessibility) -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo" aria-label="Local Terrain Home">Local Terrain</a>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#collections">Collections ▾</a>
+                    <div class="dropdown-content" id="collections-dropdown">
+                        <a href="current-collection.html">Current Collection</a>
+                        <div id="archive-collections"></div>
+                    </div>
+                </li>
+                <li><a href="blog.html" aria-current="page">Stories</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="../index.html#newsletter" class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Join Our Journey</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs (SEO + UX) -->
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="../index.html">
+                    <span itemprop="name">Home</span>
+                </a>
+                <meta itemprop="position" content="1" />
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Stories</span>
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <header class="blog-hero">
+            <h1 class="blog-hero-title">Stories from the Road</h1>
+            <p class="blog-hero-subtitle">~ Maker Journeys • Workshop Discoveries • Craft Preservation ~</p>
+            <p class="blog-hero-text">
+                Every piece in our collection has a story. Behind each craft is an artisan who learned from generations before. 
+                These are their stories, their workshops, and the techniques that are slowly disappearing.
+            </p>
+        </header>
+
+        <!-- Category Filter -->
+        <section class="blog-filter" aria-label="Filter posts by category">
+            <div class="container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all" aria-pressed="true">All Stories</button>
+                    <button class="filter-btn" data-category="Maker Story" aria-pressed="false">Maker Stories</button>
+                    <button class="filter-btn" data-category="Workshop Directory" aria-pressed="false">Workshop Guides</button>
+                    <button class="filter-btn" data-category="Travel Guide" aria-pressed="false">Travel Notes</button>
+                    <button class="filter-btn" data-category="Craft Techniques" aria-pressed="false">Craft Techniques</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Posts Grid -->
+        <section class="container mt-lg" aria-label="Blog posts">
+            <div id="blog-posts-grid" class="blog-grid">
+                <div class="loading" role="status" aria-live="polite">
+                    <span>Loading stories...</span>
+                </div>
+            </div>
+            
+            <!-- Load More -->
+            <div class="text-center mt-lg" id="load-more-container" style="display: none;">
+                <button class="cta-button" id="load-more-btn">Load More Stories</button>
+            </div>
+        </section>
+
+        <!-- Newsletter CTA -->
+        <section class="blog-newsletter-cta container mt-xl">
+            <div class="newsletter-card">
+                <h2>Never Miss a Maker's Story</h2>
+                <p>Get new artisan stories, workshop discoveries, and craft preservation updates delivered to your inbox.</p>
+                <form id="blog-newsletter-form" aria-label="Newsletter signup">
+                    <div class="newsletter-input-group">
+                        <input 
+                            type="email" 
+                            id="blog-newsletter-email" 
+                            placeholder="Your email address" 
+                            required
+                            aria-label="Email address"
+                            aria-required="true"
+                        >
+                        <button type="submit" class="cta-button">Subscribe</button>
+                    </div>
+                    <div id="blog-newsletter-error" class="form-error" role="alert"></div>
+                    <div id="blog-newsletter-success" class="success-message" style="display: none;" role="status">
+                        Welcome aboard! Check your email to confirm.
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="current-collection.html">Current Collection</a></li>
+                    <li><a href="blog.html">Maker Stories</a></li>
+                    <li><a href="blog.html?category=Workshop+Directory">Workshop Directory</a></li>
+                    <li><a href="experiences.html">Craft Retreats (Coming Soon)</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../index.html#newsletter">Newsletter</a></li>
+                    <li><a href="https://instagram.com/localterrain" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="shipping.html">Shipping Info</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            Preserving traditional crafts, one story at a time...
+        </div>
+        <p class="text-center" style="margin-top: 1rem; font-size: 0.9rem; color: #6b635c;">
+            Each piece ships from Milan • We handle customs • Supporting artisans worldwide
+        </p>
+        <p class="text-center" style="margin-top: 0.5rem; font-style: italic; color: #999;">
+            © 2026 Local Terrain. Authentic crafts, authentic stories.
+        </p>
+    </footer>
+
+    <!-- Configuration -->
+    <script src="../config.js"></script>
+    
+    <!-- Supabase Client -->
+    <script src="../js/supabase-client.js"></script>
+    
+    <!-- Main App Logic -->
+    <script src="../js/main.js"></script>
+    
+    <!-- Blog Page Logic -->
+    <script>
+        let currentCategory = 'all';
+        let currentOffset = 0;
+        const postsPerPage = 9;
+        let allPosts = [];
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize
+            window.CraftCaravanAPI.init();
+            
+            // Load posts
+            await loadBlogPosts();
+            
+            // Setup filters
+            setupCategoryFilters();
+            
+            // Setup newsletter form
+            setupBlogNewsletterForm();
+            
+            // Check URL params for category
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryParam = urlParams.get('category');
+            if (categoryParam) {
+                filterByCategory(categoryParam);
+            }
+        });
+        
+        async function loadBlogPosts() {
+            const container = document.getElementById('blog-posts-grid');
+            
+            const { data: posts, error } = await window.CraftCaravanAPI.posts.getAll();
+            
+            if (error || !posts || posts.length === 0) {
+                container.innerHTML = '<p class="text-center" style="grid-column: 1/-1;">No stories available yet. Check back soon!</p>';
+                return;
+            }
+            
+            allPosts = posts;
+            displayPosts(posts);
+        }
+        
+        function displayPosts(posts) {
+            const container = document.getElementById('blog-posts-grid');
+            container.innerHTML = '';
+            
+            if (posts.length === 0) {
+                container.innerHTML = '<p class="text-center" style="grid-column: 1/-1;">No stories found in this category.</p>';
+                return;
+            }
+            
+            posts.forEach((post, index) => {
+                const card = createBlogPostCard(post, index);
+                container.appendChild(card);
+            });
+        }
+        
+        function createBlogPostCard(post, index) {
+            const article = document.createElement('article');
+            article.className = 'blog-card';
+            article.setAttribute('itemscope', '');
+            article.setAttribute('itemtype', 'https://schema.org/BlogPosting');
+            article.style.animationDelay = `${(index % 9) * 0.1}s`;
+            
+            const publishedDate = new Date(post.published_at);
+            const formattedDate = publishedDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const isoDate = publishedDate.toISOString();
+            
+            article.innerHTML = `
+                <a href="blog-post.html?slug=${post.slug}" itemprop="url">
+                    ${post.featured_image 
+                        ? `<img 
+                            src="${post.featured_image}" 
+                            alt="${window.CraftCaravanAPI.utils.sanitize(post.title)}" 
+                            class="blog-image" 
+                            loading="lazy"
+                            itemprop="image"
+                        >`
+                        : `<div class="blog-image blog-placeholder" style="background: linear-gradient(135deg, var(--azure), var(--olive));"></div>`
+                    }
+                    <div class="blog-content">
+                        <span class="blog-category" itemprop="articleSection">${post.category}</span>
+                        <h2 class="blog-title" itemprop="headline">${window.CraftCaravanAPI.utils.sanitize(post.title)}</h2>
+                        <p class="blog-excerpt" itemprop="description">${window.CraftCaravanAPI.utils.sanitize(post.excerpt)}</p>
+                        <div class="blog-meta">
+                            <time class="blog-date" datetime="${isoDate}" itemprop="datePublished">${formattedDate}</time>
+                            <span class="blog-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                <span itemprop="name">${post.author || 'Local Terrain'}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <meta itemprop="publisher" content="Local Terrain">
+                </a>
+            `;
+            
+            return article;
+        }
+        
+        function setupCategoryFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.dataset.category;
+                    
+                    // Update active state
+                    filterButtons.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-pressed', 'true');
+                    
+                    // Filter posts
+                    filterByCategory(category);
+                });
+            });
+        }
+        
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            if (category === 'all') {
+                displayPosts(allPosts);
+            } else {
+                const filtered = allPosts.filter(post => post.category === category);
+                displayPosts(filtered);
+            }
+            
+            // Update URL without reload
+            const newUrl = category === 'all' 
+                ? window.location.pathname 
+                : `${window.location.pathname}?category=${encodeURIComponent(category)}`;
+            window.history.replaceState({}, '', newUrl);
+        }
+        
+        function setupBlogNewsletterForm() {
+            const form = document.getElementById('blog-newsletter-form');
+            const errorDiv = document.getElementById('blog-newsletter-error');
+            const successDiv = document.getElementById('blog-newsletter-success');
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+                
+                const email = document.getElementById('blog-newsletter-email').value;
+                const submitBtn = form.querySelector('button[type="submit"]');
+                
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Subscribing...';
+                
+                const { data, error } = await window.CraftCaravanAPI.newsletter.subscribe(
+                    email,
+                    ['maker_stories', 'new_posts'],
+                    'blog_page'
+                );
+                
+                if (error) {
+                    errorDiv.textContent = error;
+                    errorDiv.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Subscribe';
+                } else {
+                    successDiv.style.display = 'block';
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Subscribe';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
