@@ -180,14 +180,22 @@ async function getItemsByCollection(collectionId) {
  * Fetch blog posts
  */
 async function getPosts(limit = null, category = null) {
+    // Check if client is initialized
+    if (!supabaseClient) {
+        console.error('Supabase client not initialized. Call initSupabase() first.');
+        return { data: null, error: 'Database not initialized' };
+    }
+
     try {
+        console.log('📚 Fetching posts...', { limit, category });
+        
         let query = supabaseClient
             .from('posts')
             .select('*')
             .eq('is_published', true)
             .order('published_at', { ascending: false });
 
-        if (category) {
+        if (category && category !== 'all') {
             query = query.eq('category', category);
         }
 
@@ -197,10 +205,15 @@ async function getPosts(limit = null, category = null) {
 
         const { data, error } = await query;
 
-        if (error) throw error;
+        if (error) {
+            console.error('❌ Supabase error:', error);
+            throw error;
+        }
+        
+        console.log(`✅ Fetched ${data?.length || 0} posts`);
         return { data, error: null };
     } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error('💥 Exception fetching posts:', error);
         return { data: null, error: error.message };
     }
 }
@@ -209,7 +222,15 @@ async function getPosts(limit = null, category = null) {
  * Fetch single post by slug
  */
 async function getPostBySlug(slug) {
+    // Check if client is initialized
+    if (!supabaseClient) {
+        console.error('Supabase client not initialized. Call initSupabase() first.');
+        return { data: null, error: 'Database not initialized' };
+    }
+
     try {
+        console.log('📖 Fetching post with slug:', slug);
+        
         const { data, error } = await supabaseClient
             .from('posts')
             .select('*')
@@ -217,10 +238,15 @@ async function getPostBySlug(slug) {
             .eq('is_published', true)
             .single();
 
-        if (error) throw error;
+        if (error) {
+            console.error('❌ Supabase error:', error);
+            throw error;
+        }
+        
+        console.log('✅ Post found:', data?.title);
         return { data, error: null };
     } catch (error) {
-        console.error('Error fetching post:', error);
+        console.error('💥 Exception fetching post:', error);
         return { data: null, error: error.message };
     }
 }

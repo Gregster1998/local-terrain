@@ -266,8 +266,23 @@
         let allPosts = [];
         
         document.addEventListener('DOMContentLoaded', async () => {
-            // Initialize
-            window.CraftCaravanAPI.init();
+            console.log('🎨 Blog page loading...');
+            
+            // Initialize Supabase
+            const client = window.CraftCaravanAPI.init();
+            
+            if (!client) {
+                console.error('❌ Supabase failed to initialize');
+                document.getElementById('blog-posts-grid').innerHTML = `
+                    <div class="error-message" style="grid-column: 1/-1;">
+                        <h3>Configuration Error</h3>
+                        <p>Could not connect to database. Please check your setup.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            console.log('✅ Supabase initialized');
             
             // Load posts
             await loadBlogPosts();
@@ -288,16 +303,59 @@
         
         async function loadBlogPosts() {
             const container = document.getElementById('blog-posts-grid');
+            console.log('📚 Loading blog posts...');
             
-            const { data: posts, error } = await window.CraftCaravanAPI.posts.getAll();
-            
-            if (error || !posts || posts.length === 0) {
-                container.innerHTML = '<p class="text-center" style="grid-column: 1/-1;">No stories available yet. Check back soon!</p>';
-                return;
+            try {
+                const { data: posts, error } = await window.CraftCaravanAPI.posts.getAll();
+                
+                console.log('📊 Posts response:', { posts, error });
+                
+                if (error) {
+                    console.error('❌ Error loading posts:', error);
+                    container.innerHTML = `
+                        <div class="error-message" style="grid-column: 1/-1;">
+                            <h3>Error Loading Stories</h3>
+                            <p>${error}</p>
+                            <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                                Check browser console (F12) for details.
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                if (!posts || posts.length === 0) {
+                    console.warn('⚠️ No posts found');
+                    container.innerHTML = `
+                        <div class="text-center" style="grid-column: 1/-1; padding: 4rem 2rem;">
+                            <h3 style="font-family: var(--font-handwriting); font-size: 2rem; color: var(--terracotta); margin-bottom: 1rem;">
+                                No Stories Yet
+                            </h3>
+                            <p style="font-size: 1.1rem; color: #6b635c; margin-bottom: 2rem;">
+                                We're still gathering maker stories. Check back soon!
+                            </p>
+                            <p style="font-size: 0.9rem; color: #999;">
+                                Or add your first post in Supabase → posts table
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                console.log(`✅ Loaded ${posts.length} posts`);
+                allPosts = posts;
+                displayPosts(posts);
+                
+            } catch (err) {
+                console.error('💥 Exception loading posts:', err);
+                container.innerHTML = `
+                    <div class="error-message" style="grid-column: 1/-1;">
+                        <h3>Unexpected Error</h3>
+                        <p>${err.message}</p>
+                        <pre style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 4px; overflow: auto;">${err.stack}</pre>
+                    </div>
+                `;
             }
-            
-            allPosts = posts;
-            displayPosts(posts);
         }
         
         function displayPosts(posts) {
