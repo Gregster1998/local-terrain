@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Local Terrain</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #2B2520;
+        }
+        .section {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.warning { background: #fff3cd; color: #856404; }
+        pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            border-left: 4px solid #5B8FA3;
+        }
+        .post-item {
+            border-left: 3px solid #8B9A6C;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        button {
+            background: #5B8FA3;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+        button:hover {
+            background: #4a7082;
+        }
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #5B8FA3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Local Terrain - Debug Panel</h1>
+    <p style="color: #666;">This page helps diagnose connection and data issues.</p>
+
+    <!-- Configuration Check -->
+    <div class="section">
+        <h2>1. Configuration Check</h2>
+        <p>Checking if config.js is loaded...</p>
+        <div id="config-status">
+            <div class="loader"></div> Checking...
+        </div>
+    </div>
+
+    <!-- Supabase Connection -->
+    <div class="section">
+        <h2>2. Supabase Connection</h2>
+        <p>Testing connection to Supabase...</p>
+        <div id="connection-status">
+            <div class="loader"></div> Testing...
+        </div>
+    </div>
+
+    <!-- Database Tables -->
+    <div class="section">
+        <h2>3. Database Tables</h2>
+        <p>Checking which tables are accessible...</p>
+        <div id="tables-status">
+            <div class="loader"></div> Checking...
+        </div>
+    </div>
+
+    <!-- Posts Check -->
+    <div class="section">
+        <h2>4. Blog Posts</h2>
+        <p>Loading posts from database...</p>
+        <button onclick="loadPosts()">🔄 Reload Posts</button>
+        <div id="posts-status" style="margin-top: 1rem;">
+            <div class="loader"></div> Loading...
+        </div>
+    </div>
+
+    <!-- Raw Data View -->
+    <div class="section">
+        <h2>5. Raw Data</h2>
+        <button onclick="showRawData()">📊 Show Raw JSON</button>
+        <pre id="raw-data" style="display: none; margin-top: 1rem;"></pre>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="section">
+        <h2>6. Quick Actions</h2>
+        <button onclick="window.location.href='../index.html'">🏠 Go to Home</button>
+        <button onclick="window.location.href='blog.html'">📖 Go to Blog</button>
+        <button onclick="window.location.href='current-collection.html'">🎨 Go to Collection</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+
+    <script>
+        let postsData = null;
+
+        // 1. Check Configuration
+        async function checkConfig() {
+            const configDiv = document.getElementById('config-status');
+            
+            if (typeof window.SUPABASE_CONFIG === 'undefined') {
+                configDiv.innerHTML = '<span class="status error">❌ FAILED</span><p>config.js not loaded or SUPABASE_CONFIG not defined.</p>';
+                return false;
+            }
+
+            const config = window.SUPABASE_CONFIG;
+            
+            if (!config.url || !config.anonKey) {
+                configDiv.innerHTML = '<span class="status error">❌ FAILED</span><p>Config exists but missing url or anonKey.</p>';
+                return false;
+            }
+
+            configDiv.innerHTML = `
+                <span class="status success">✅ SUCCESS</span>
+                <p><strong>Supabase URL:</strong> ${config.url}</p>
+                <p><strong>Anon Key:</strong> ${config.anonKey.substring(0, 30)}...</p>
+            `;
+            return true;
+        }
+
+        // 2. Test Supabase Connection
+        async function testConnection() {
+            const connDiv = document.getElementById('connection-status');
+            
+            try {
+                const client = window.CraftCaravanAPI.init();
+                
+                if (!client) {
+                    connDiv.innerHTML = '<span class="status error">❌ FAILED</span><p>Could not initialize Supabase client.</p>';
+                    return false;
+                }
+
+                connDiv.innerHTML = '<span class="status success">✅ SUCCESS</span><p>Supabase client initialized successfully.</p>';
+                return true;
+            } catch (err) {
+                connDiv.innerHTML = `<span class="status error">❌ ERROR</span><p>${err.message}</p>`;
+                return false;
+            }
+        }
+
+        // 3. Check Tables
+        async function checkTables() {
+            const tablesDiv = document.getElementById('tables-status');
+            const client = window.CraftCaravanAPI.get();
+            
+            if (!client) {
+                tablesDiv.innerHTML = '<span class="status error">❌ FAILED</span><p>No client available.</p>';
+                return;
+            }
+
+            const tables = ['posts', 'collections', 'items', 'newsletter'];
+            let results = [];
+
+            for (const table of tables) {
+                try {
+                    const { data, error } = await client.from(table).select('id').limit(1);
+                    
+                    if (error) {
+                        results.push(`<li>❌ <strong>${table}</strong>: ${error.message}</li>`);
+                    } else {
+                        results.push(`<li>✅ <strong>${table}</strong>: Accessible</li>`);
+                    }
+                } catch (err) {
+                    results.push(`<li>❌ <strong>${table}</strong>: ${err.message}</li>`);
+                }
+            }
+
+            tablesDiv.innerHTML = `<ul style="list-style: none; padding: 0;">${results.join('')}</ul>`;
+        }
+
+        // 4. Load Posts
+        async function loadPosts() {
+            const postsDiv = document.getElementById('posts-status');
+            postsDiv.innerHTML = '<div class="loader"></div> Loading...';
+
+            try {
+                const { data: posts, error } = await window.CraftCaravanAPI.posts.getAll();
+
+                if (error) {
+                    postsDiv.innerHTML = `
+                        <span class="status error">❌ ERROR</span>
+                        <p><strong>Error:</strong> ${error}</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                            This usually means:
+                            <ul>
+                                <li>The posts table doesn't exist</li>
+                                <li>Row Level Security is blocking access</li>
+                                <li>No posts have is_published = true</li>
+                            </ul>
+                        </p>
+                    `;
+                    return;
+                }
+
+                if (!posts || posts.length === 0) {
+                    postsDiv.innerHTML = `
+                        <span class="status warning">⚠️ NO DATA</span>
+                        <p>Posts table is empty or no published posts found.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                            <strong>To add a post:</strong>
+                            <ol>
+                                <li>Go to Supabase → Table Editor → posts</li>
+                                <li>Click "Insert row"</li>
+                                <li>Fill in required fields</li>
+                                <li>Set is_published = true</li>
+                            </ol>
+                        </p>
+                    `;
+                    return;
+                }
+
+                postsData = posts;
+
+                let html = `<span class="status success">✅ SUCCESS</span><p>Found ${posts.length} post(s):</p>`;
+                
+                posts.forEach((post, index) => {
+                    const url = `blog-post.html?slug=${post.slug}`;
+                    html += `
+                        <div class="post-item">
+                            <p><strong>${index + 1}. ${post.title}</strong></p>
+                            <p style="font-size: 0.9rem; color: #666;">
+                                Slug: <code>${post.slug}</code><br>
+                                Category: ${post.category}<br>
+                                Published: ${post.is_published ? '✅' : '❌'}<br>
+                                <a href="${url}" target="_blank">View Post →</a>
+                            </p>
+                        </div>
+                    `;
+                });
+
+                postsDiv.innerHTML = html;
+
+            } catch (err) {
+                postsDiv.innerHTML = `
+                    <span class="status error">❌ EXCEPTION</span>
+                    <p><strong>Exception:</strong> ${err.message}</p>
+                    <pre>${err.stack}</pre>
+                `;
+            }
+        }
+
+        // 5. Show Raw Data
+        function showRawData() {
+            const rawDiv = document.getElementById('raw-data');
+            
+            if (!postsData) {
+                alert('Load posts first!');
+                return;
+            }
+
+            rawDiv.textContent = JSON.stringify(postsData, null, 2);
+            rawDiv.style.display = 'block';
+        }
+
+        // Run all checks on load
+        async function runAllChecks() {
+            console.log('🔧 Running diagnostics...');
+            
+            const configOk = await checkConfig();
+            if (!configOk) return;
+
+            const connectionOk = await testConnection();
+            if (!connectionOk) return;
+
+            await checkTables();
+            await loadPosts();
+
+            console.log('✅ Diagnostics complete');
+        }
+
+        // Run on page load
+        window.addEventListener('DOMContentLoaded', runAllChecks);
+    </script>
+</body>
+</html>
